@@ -1,6 +1,18 @@
+.body {
+    width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+.body__title {
+    text-align: center;
+    font-family: 'Varela Round', sans-serif;
+}
+
 #myCanvas {
     background-image: url('images/bg.png');
     background-size: cover;
     background-repeat: no-repeat;
     border: 1px solid #333;
 }
+
