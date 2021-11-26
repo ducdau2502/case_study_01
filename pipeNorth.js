@@ -16,7 +16,11 @@ class PipeNorth {
     }
 
     moveLeft() {
-        this.x -= 2;
+        if (score >= 5) {
+            this.x -= 2;
+        } else {
+            this.x -= 1;
+        }
     }
 
 }

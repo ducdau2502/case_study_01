@@ -26,7 +26,7 @@ function start() {
         ctx.fillText("High Score : " + sessionStorage['high_score' + (sessionStorage.length - 1)], 170, cvs.height - 20);
 
 
-        if (pN[i].x === cvs.width / 2 - 12) {
+        if (pN[i].x === (cvs.width / 2 - 40)) {
             let randomY = Math.floor(Math.random() * (-110 + 310) - 310);
             // let gap = Math.floor(Math.random() * (90 - 80) + 80);
             pN.push(new PipeNorth(cvs.width + 50, randomY));
@@ -58,7 +58,7 @@ function start() {
     requestAnimationFrame(start);
 }
 
-// start();
+start();
 // function startGame() {
 //     start();
 //     document.getElementById('startGame').style.display = "none";
