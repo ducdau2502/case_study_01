@@ -51,10 +51,7 @@ function start() {
                 sessionStorage.setItem('high_score' + (j + 1), highScore)
             }
         }
-
-
     }
-
     requestAnimationFrame(start);
 }
 
@@ -76,7 +73,6 @@ function restart() {
     document.getElementById('body__score').style.display = "none";
     start();
 }
-
 
 function moveBird() {
     bird.moveUp();
