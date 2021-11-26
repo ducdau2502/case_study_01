@@ -1,8 +1,8 @@
 let cvs = document.getElementById("myCanvas");
 let ctx = cvs.getContext("2d");
 let gap = 85;
-let spacePipe;
 let score = 0;
+let spacePipe;
 let highScore = 0;
 sessionStorage.setItem('high_score0', 0)
 let bird = new Bird(40, 120);
@@ -14,56 +14,63 @@ function start() {
     clearCanvas();
     bird.drawBird();
     bird.moveDown();
-
     for (let i = 0; i < pN.length; i++) {
-        pN[i].drawPipeNorth();
-        pS[i].drawPipeSouth();
-        fg.drawGround();
-        pN[i].moveLeft();
-        pS[i].moveLeft();
-        ctx.fillStyle = "#090909";
-        ctx.font = "20px Varela Round";
-        ctx.fillText("Score : " + score, 10, cvs.height - 20);
-        ctx.fillText("High Score : " + sessionStorage['high_score' + (sessionStorage.length - 1)], 170, cvs.height - 20);
-
-        if (score >= 9) {
-            spacePipe = 89;
-        } else if (score >= 4) {
-            spacePipe = 120;
-        } else {
-            spacePipe = 150;
+        drawPipe(i)
+        if (checkContact(i) === false) {
+            return;
         }
-
-        if (pN[i].x === spacePipe) {
-            let randomY = Math.floor(Math.random() * (-110 + 310) - 310);
-            // let gap = Math.floor(Math.random() * (90 - 80) + 80);
-            pN.push(new PipeNorth(cvs.width + 50, randomY));
-            pS.push(new PipeSouth(cvs.width + 50, randomY + 380 + gap));
-        }
-
-        if (bird.y <= 0 || bird.y + bird.height >= fg.y ||
-            bird.x + bird.width - 3 >= pN[i].x && bird.x <= pN[i].x + pN[i].width - 3 && bird.y - 3 <= pN[i].y + pN[i].height ||
-            bird.x + bird.width - 3 >= pS[i].x && bird.x <= pS[i].x + pS[i].width - 3 && bird.y + bird.height - 3 >= pS[i].y) {
-            stopGame();
-            return
-        }
-
         if (pN[i].x === bird.x - 40) {
             score++;
             getScore.play();
         }
-
-        for (let j = 0; j < sessionStorage.length; j++) {
-            if (sessionStorage['high_score' + (sessionStorage.length - 1)] < score) {
-                highScore = score;
-                sessionStorage.setItem('high_score' + (j + 1), highScore)
-            }
-        }
     }
+    ctx.fillStyle = "#090909";
+    ctx.font = "24px Dancing Script";
+    ctx.fillText("Score : " + score, 20, cvs.height - 50);
+    ctx.fillText("High Score : " + sessionStorage['high_score' + (sessionStorage.length - 1)], 140, cvs.height - 50);
+    checkHighScore()
     requestAnimationFrame(start);
 }
-
 start();
+
+function drawPipe(i) {
+    pN[i].drawPipeNorth();
+    pS[i].drawPipeSouth();
+    fg.drawGround();
+    pN[i].moveLeft();
+    pS[i].moveLeft();
+
+    if (score < 10) {
+        spacePipe = 150;
+    } else {
+        spacePipe = 120;
+    }
+
+    if (pN[i].x === spacePipe) {
+        let randomY = Math.floor(Math.random() * (-110 + 310) - 310);
+        pN.push(new PipeNorth(cvs.width + 50, randomY));
+        pS.push(new PipeSouth(cvs.width + 50, randomY + 380 + gap));
+    }
+}
+
+function checkContact(i) {
+    if (bird.y <= 0 || bird.y + bird.height >= fg.y ||
+        bird.x + bird.width - 3 >= pN[i].x && bird.x <= pN[i].x + pN[i].width - 3 && bird.y - 3 <= pN[i].y + pN[i].height ||
+        bird.x + bird.width - 3 >= pS[i].x && bird.x <= pS[i].x + pS[i].width - 3 && bird.y + bird.height - 3 >= pS[i].y) {
+        stopGame();
+        return false;
+    }
+}
+
+function checkHighScore() {
+    for (let j = 0; j < sessionStorage.length; j++) {
+        if (sessionStorage['high_score' + (sessionStorage.length - 1)] < score) {
+            highScore = score;
+            sessionStorage.setItem('high_score' + (j + 1), highScore)
+        }
+    }
+}
+
 // function startGame() {
 //     start();
 //     document.getElementById('startGame').style.display = "none";

@@ -4,23 +4,23 @@
     margin: auto;
     text-align: center;
     position: relative;
+    font-family: 'Dancing Script', cursive;
 }
 
 .body__title {
     text-align: center;
-    font-family: 'Varela Round', sans-serif;
 }
 
 .body__score {
     position: absolute;
     display: none;
     width: 200px;
-    height: 110px;
+    height: 130px;
     background-color: rgb(238, 238, 238);
     top: 200px;
     left: 200px;
     border: 1px solid #333;
-    font-size: 20px;
+    font-size: 26px;
     border-radius: 5px;
     box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1);
 }
@@ -37,6 +37,7 @@
     border-radius: 5px;
     background-color: rgba(131, 131, 131, 0.4);
     font-size: 18px;
+    font-family: 'Dancing Script', cursive;
     color: #333333;
     min-width: 100px;
 }

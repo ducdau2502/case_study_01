@@ -16,12 +16,10 @@ class PipeSouth {
     }
 
     moveLeft() {
-        if (score >= 10) {
-            this.x -= 3;
-        } else if (score >= 5) {
-            this.x -= 2;
-        }else {
+        if (score <= 10) {
             this.x -= 1;
+        } else {
+            this.x -= 2;
         }
     }
 
