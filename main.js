@@ -1,6 +1,7 @@
 let cvs = document.getElementById("myCanvas");
 let ctx = cvs.getContext("2d");
 let gap = 85;
+let spacePipe;
 let score = 0;
 let highScore = 0;
 sessionStorage.setItem('high_score0', 0)
@@ -25,8 +26,15 @@ function start() {
         ctx.fillText("Score : " + score, 10, cvs.height - 20);
         ctx.fillText("High Score : " + sessionStorage['high_score' + (sessionStorage.length - 1)], 170, cvs.height - 20);
 
+        if (score >= 9) {
+            spacePipe = 89;
+        } else if (score >= 4) {
+            spacePipe = 120;
+        } else {
+            spacePipe = 150;
+        }
 
-        if (pN[i].x === (cvs.width / 2 - 40)) {
+        if (pN[i].x === spacePipe) {
             let randomY = Math.floor(Math.random() * (-110 + 310) - 310);
             // let gap = Math.floor(Math.random() * (90 - 80) + 80);
             pN.push(new PipeNorth(cvs.width + 50, randomY));
@@ -44,8 +52,8 @@ function start() {
             score++;
             getScore.play();
         }
-        for (let j = 0; j < sessionStorage.length; j++) {
 
+        for (let j = 0; j < sessionStorage.length; j++) {
             if (sessionStorage['high_score' + (sessionStorage.length - 1)] < score) {
                 highScore = score;
                 sessionStorage.setItem('high_score' + (j + 1), highScore)
