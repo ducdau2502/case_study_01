@@ -8,15 +8,17 @@
 </head>
 <body>
 <div class="body">
-    <h1 class="body__title">Bạn tôi bay bay</h1>
+    <h1 class="body__title">Flappy Bird</h1>
     <canvas id="myCanvas" class="myCanvas" width="300" height="520"></canvas>
+    <br>
+<!--    <button id="startGame" class="btn" onclick="startGame()">Start</button>-->
+    <button id="restart" class="btn" style="display: none" type="reset" onclick="restart()">Restart</button>
 </div>
 <img id="bird" style="display: none" src="./images/bird.png" alt="">
-<img id="fg" style="display: none" src="./images/fg.png" alt="">
+<img id="fg" style="display: none" src="images/ground.png" alt="">
 <img id="pipeNorth" style="display: none" src="./images/pipeNorth.png" alt="">
 <img id="pipeSouth" style="display: none" src="./images/pipeSouth.png" alt="">
 
-<!--<button type="button" onclick="startGame()">Start</button>-->
 <script src="pipeNorth.js"></script>
 
 

@@ -2,6 +2,7 @@
     width: 600px;
     margin: auto;
     text-align: center;
+    position: relative;
 }
 
 .body__title {
@@ -9,8 +10,27 @@
     font-family: 'Varela Round', sans-serif;
 }
 
+.btn {
+    position: absolute;
+    top: 280px;
+    left: 240px;
+    padding: 20px 25px;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #efefef;
+    font-size: 20px;
+    color: #333333;
+    min-width: 120px;
+}
+
+.btn:hover {
+    top: 278px;
+    background-color: #d3d3d3;
+}
+
 #myCanvas {
-    background-image: url('images/bg.png');
+    background-image: url('images/background.png');
     background-size: cover;
     background-repeat: no-repeat;
     border: 1px solid #333;

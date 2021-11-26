@@ -20,6 +20,7 @@ class Bird {
     }
     moveDown() {
         this.y += 2;
+
     }
 }
 
