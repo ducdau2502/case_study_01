@@ -18,6 +18,7 @@ class Bird {
     moveUp() {
         this.y -= 34;
     }
+
     moveDown() {
         this.y += 2;
     }
