@@ -7,8 +7,8 @@ class Bird {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.width = 40;
-        this.height = 30;
+        this.width = 38;
+        this.height = 26;
     }
 
     drawBird() {
@@ -16,7 +16,7 @@ class Bird {
     }
 
     moveUp() {
-        this.y -= 30;
+        this.y -= 34;
     }
     moveDown() {
         this.y += 2;

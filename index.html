@@ -11,17 +11,22 @@
     <h1 class="body__title">Flappy Bird</h1>
     <canvas id="myCanvas" class="myCanvas" width="300" height="520"></canvas>
     <br>
-<!--    <button id="startGame" class="btn" onclick="startGame()">Start</button>-->
-    <button id="restart" class="btn" style="display: none" type="reset" onclick="restart()">Restart</button>
+    <div id="body__score" class="body__score">
+        <p class="score__heading">Score: <span id="score__title" class="score__title"></span></p>
+        <button id="restart" class="btn" type="reset" onclick="restart()">Restart</button>
+    </div>
+    <button id="startGame" class="btn" onclick="startGame()">Start</button>
 </div>
 <img id="bird" style="display: none" src="./images/bird.png" alt="">
 <img id="fg" style="display: none" src="images/ground.png" alt="">
 <img id="pipeNorth" style="display: none" src="./images/pipeNorth.png" alt="">
 <img id="pipeSouth" style="display: none" src="./images/pipeSouth.png" alt="">
 
+<audio id="music">
+    <source src="sounds/CallOfDuty-BrianTyler_3v8ft (mp3cut.net).mp3" type="audio/mpeg">
+</audio>
+
 <script src="pipeNorth.js"></script>
-
-
 <script src="pipeSouth.js"></script>
 <script src="classBird.js"></script>
 <script src="main.js"></script>
