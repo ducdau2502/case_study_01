@@ -17,7 +17,7 @@ class Bird {
     }
 
     moveUp() {
-        this.y -= 34;
+        this.y -= 32;
     }
 
     moveDown() {
@@ -26,26 +26,5 @@ class Bird {
         } else {
             this.y += 2;
         }
-    }
-}
-
-
-
-class Ground {
-    x;
-    y;
-    width;
-    height;
-
-    constructor() {
-        this.x = 0;
-        this.y = cvs.height - 120;
-        this.width = cvs.width;
-        this.height = 120;
-    }
-
-    drawGround() {
-        ctx.drawImage(document.getElementById("fg"), this.x, this.y, this.width, this.height);
-
     }
 }

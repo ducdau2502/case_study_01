@@ -4,22 +4,25 @@ let gap = 85;
 let score = 0;
 let spacePipe;
 let highScore = 0;
-sessionStorage.setItem('high_score0', 0)
+sessionStorage.setItem('high_score0', highScore);
 let bird = new Bird(40, 120);
-let fg = new Ground()
-let pN = [new PipeNorth(cvs.width + 50, Math.floor(Math.random() * (-100 + 300) - 300))];
-let pS = [new PipeSouth(cvs.width + 50, pN[0].y + pN[0].height + gap)];
+let ground = new Ground();
+let pipeNorths = [new PipeNorth(cvs.width + 50, Math.floor(Math.random() * (-100 + 300) - 300))];
+let pipeSouths = [new PipeSouth(cvs.width + 50, pipeNorths[0].y + pipeNorths[0].height + gap)];
 
 function start() {
     clearCanvas();
     bird.drawBird();
     bird.moveDown();
-    for (let i = 0; i < pN.length; i++) {
-        drawPipe(i)
+    window.addEventListener("keydown", moveBird);
+    window.addEventListener('keydown', musicPlay);
+
+    for (let i = 0; i < pipeNorths.length; i++) {
+        drawPipe(i);
         if (checkContact(i) === false) {
             return;
         }
-        if (pN[i].x === bird.x - 40) {
+        if (pipeNorths[i].x === bird.x - 40) {
             score++;
             getScore.play();
         }
@@ -28,17 +31,17 @@ function start() {
     ctx.font = "24px Dancing Script";
     ctx.fillText("Score : " + score, 20, cvs.height - 50);
     ctx.fillText("High Score : " + sessionStorage['high_score' + (sessionStorage.length - 1)], 140, cvs.height - 50);
-    checkHighScore()
+    checkHighScore();
     requestAnimationFrame(start);
 }
-start();
+
 
 function drawPipe(i) {
-    pN[i].drawPipeNorth();
-    pS[i].drawPipeSouth();
-    fg.drawGround();
-    pN[i].moveLeft();
-    pS[i].moveLeft();
+    pipeNorths[i].drawPipeNorth();
+    pipeSouths[i].drawPipeSouth();
+    ground.drawGround();
+    pipeNorths[i].moveLeft();
+    pipeSouths[i].moveLeft();
 
     if (score < 10) {
         spacePipe = 150;
@@ -46,18 +49,20 @@ function drawPipe(i) {
         spacePipe = 120;
     }
 
-    if (pN[i].x === spacePipe) {
+    if (pipeNorths[i].x === spacePipe) {
         let randomY = Math.floor(Math.random() * (-110 + 310) - 310);
-        pN.push(new PipeNorth(cvs.width + 50, randomY));
-        pS.push(new PipeSouth(cvs.width + 50, randomY + 380 + gap));
+        pipeNorths.push(new PipeNorth(cvs.width + 50, randomY));
+        pipeSouths.push(new PipeSouth(cvs.width + 50, randomY + 380 + gap));
     }
 }
 
 function checkContact(i) {
-    if (bird.y <= 0 || bird.y + bird.height >= fg.y ||
-        bird.x + bird.width - 3 >= pN[i].x && bird.x <= pN[i].x + pN[i].width - 3 && bird.y - 3 <= pN[i].y + pN[i].height ||
-        bird.x + bird.width - 3 >= pS[i].x && bird.x <= pS[i].x + pS[i].width - 3 && bird.y + bird.height - 3 >= pS[i].y) {
+    if (bird.y <= 0 || bird.y + bird.height >= ground.y ||
+        bird.x + bird.width - 3 >= pipeNorths[i].x && bird.x <= pipeNorths[i].x + pipeNorths[i].width - 3 && bird.y - 3 <= pipeNorths[i].y + pipeNorths[i].height ||
+        bird.x + bird.width - 3 >= pipeSouths[i].x && bird.x <= pipeSouths[i].x + pipeSouths[i].width - 3 && bird.y + bird.height - 3 >= pipeSouths[i].y) {
         stopGame();
+        window.removeEventListener('keydown', moveBird);
+        window.removeEventListener('keydown', musicPlay);
         return false;
     }
 }
@@ -66,25 +71,27 @@ function checkHighScore() {
     for (let j = 0; j < sessionStorage.length; j++) {
         if (sessionStorage['high_score' + (sessionStorage.length - 1)] < score) {
             highScore = score;
-            sessionStorage.setItem('high_score' + (j + 1), highScore)
+            sessionStorage.setItem('high_score' + (j + 1), highScore);
         }
     }
 }
 
-// function startGame() {
-//     start();
-//     document.getElementById('startGame').style.display = "none";
-// }
+function startGame() {
+    start();
+    document.getElementById('startGame').style.display = "none";
+}
 
 function stopGame() {
     document.getElementById('score__title').innerHTML = `${score}`;
     document.getElementById('body__score').style.display = "block";
     document.getElementById('music').pause();
-
 }
 
 function restart() {
-    location.reload();
+    score = 0;
+    bird = new Bird(40, 120);
+    pipeNorths = [new PipeNorth(cvs.width + 50, Math.floor(Math.random() * (-100 + 300) - 300))];
+    pipeSouths = [new PipeSouth(cvs.width + 50, pipeNorths[0].y + pipeNorths[0].height + gap)];
     document.getElementById('body__score').style.display = "none";
     start();
 }
@@ -94,13 +101,9 @@ function moveBird() {
     flyBird.play();
 }
 
-window.addEventListener("keydown", moveBird);
-
 function clearCanvas() {
     ctx.clearRect(0, 0, cvs.width, cvs.height);
 }
-
-window.addEventListener('keydown', musicPlay);
 
 function musicPlay() {
     document.getElementById('music').play();

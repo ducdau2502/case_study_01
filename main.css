@@ -29,6 +29,13 @@
     margin: 15px 0;
 }
 
+#startGame {
+    position: absolute;
+    top: 300px;
+    left: 250px;
+    background-color: rgba(204, 204, 204, 0.9);
+}
+
 .btn {
     padding: 10px 15px;
     margin-bottom: 10px;
@@ -44,7 +51,7 @@
 
 .btn:hover {
     background-color: #d3d3d3;
-    box-shadow: 0 4px 4px rgba(131, 131, 131, 0.6);
+    box-shadow: 0 8px 8px rgba(131, 131, 131, 0.6);
 }
 
 #myCanvas {
