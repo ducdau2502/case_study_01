@@ -1,6 +1,6 @@
 let cvs = document.getElementById("myCanvas");
 let ctx = cvs.getContext("2d");
-let gap = 85;
+let gap = 90;
 let score = 0;
 let spacePipe;
 let highScore = 0;
@@ -46,7 +46,7 @@ function drawPipe(i) {
     if (score < 10) {
         spacePipe = 150;
     } else {
-        spacePipe = 120;
+        spacePipe = 110;
     }
 
     if (pipeNorths[i].x === spacePipe) {
